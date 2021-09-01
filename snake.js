@@ -169,7 +169,7 @@ function CheckCollision() {
 function GameOver() { 
   ctx.clearRect(0, 0, 407, 209);
   alert("oops");
-  direction = "start"; 
+  direction = "right"; 
   ctx.fillStyle = "black";
   createCanvas();
   createInitialSnake();
@@ -177,6 +177,7 @@ function GameOver() {
   counter = 0;
   score = 1;
   speed = 300;
+  document.getElementById("score").innerHTML = "level" +" " + 1;
  // gameover = 1;
 }
 
@@ -264,6 +265,7 @@ function run() {
   if(gameover == 1){
   clearTimeout(inter);
   GameOver();
+  gameover = 0;
   console.log(counter)
   }
 }
