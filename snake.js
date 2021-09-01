@@ -4,8 +4,9 @@ var ctx, snake, direction = "right",
   inter,
   speed = 300,
   LastDirection = "right",
-  apple, 
+  apple, gameover,
   score = 1;
+  
 
 
 
@@ -70,9 +71,7 @@ function createInitialSnake() {
   for (i = 0; i < 3; i++) {
     snake.push({
       left: 187 + 11 * i,
-      top: 110,
-      width: 10,
-      height: 10
+      top: 110
     });
   }
 }
@@ -161,7 +160,7 @@ function grow() {
 function CheckCollision() {
   for (var i = 0; i < snake.length - 2; i++) {
     if (snake[i].left == snake[snake.length - 1].left && snake[i].top == snake[snake.length - 1].top) {
-      GameOver()
+      gameover = 1;
     }
   }
 }
@@ -178,11 +177,12 @@ function GameOver() {
   counter = 0;
   score = 1;
   speed = 300;
+ // gameover = 1;
 }
 
 function BoundaryCheck() {
   if (snake[snake.length - 1].left > 396 || snake[snake.length - 1].left < 0 || snake[snake.length - 1].top < 10 || snake[snake.length - 1].top > 198) {
-    GameOver();
+    gameover = 1;
   }
 }
 
@@ -261,5 +261,9 @@ function run() {
   CheckCollision();
   
   inter = setTimeout(run, speed);
-  
+  if(gameover == 1){
+  clearTimeout(inter);
+  GameOver();
+  console.log(counter)
+  }
 }
